@@ -1,8 +1,14 @@
 # JPasswordHasher
 
-A Java implementation of Steve Cooper's PasswordHasher Firefox plugin [1].
+A Java implementation of [Steve Cooper's PasswordHasher Firefox plugin](https://addons.mozilla.org/de/firefox/addon/password-hasher/ "PasswordHasher Firefox plugin").
+This project's goal is to make the PasswordHasher available outside of Firefox. It is motivated by the increasing number of services that can be used by both browsers
+and native applications, both of which then base on the same account and password. Instead of having to open Firefox, and invoking the PasswordHasher plugin it should
+be possible to access PasswordHasher directly.
 
-[1] https://addons.mozilla.org/de/firefox/addon/password-hasher/
+As a starting point a standalone Java application saves the need to start Firefox. Further ideas include developing plugins for Quicksilver, Quicklaunch, ... to access
+the PasswordHasher with even less effort.
+
+Feel free to comment and [share ideas](https://github.com/salsolatragus/JPasswordHasher/issues "JPasswordHasher issue list") of how to improove the ease of usage even further!
 
 ## Command line interface
 
