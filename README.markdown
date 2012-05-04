@@ -41,8 +41,8 @@ the specific language governing rights and limitations under the License.
 
 The Original Code is JPasswordHasher, released April 27, 2012.
 
-The Initial Developer of the Original Code is Sven Amann.
-Portions created by the Initial Developer are Copyright (C) 2012
+The Initial Developer of the Original Code is Sven Amann.  
+Portions created by the Initial Developer are Copyright (C) 2012  
 the Initial Developer. All Rights Reserved.
 
 Contributor(s): Steve Cooper
