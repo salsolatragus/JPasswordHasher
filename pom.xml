@@ -11,6 +11,25 @@
 
 	<url>https://github.com/salsolatragus/JPasswordHasher</url>
 	<description>A Java implementation of Steve Cooper's PasswordHasher Firefox plugin.</description>
+	<developers>
+		<developer>
+			<id>salsolatragus</id>
+			<name>Sven Amann</name>
+			<email>info@sven-amann.de</email>
+			<url>https://www.sven-amann.de</url>
+		</developer>
+	</developers>
+	
+	<issueManagement>
+		<url>https://github.com/salsolatragus/JPasswordHasher/issues</url>
+		<system>GitHub Issues</system>
+	</issueManagement>
+	<scm>
+		<url>https://github.com/salsolatragus/JPasswordHasher</url>
+		<connection>scm:git:git://github.com/salsolatragus/JPasswordHasher.git</connection>
+		<developerConnection>scm:git:git@github.com:salsolatragus/JPasswordHasher.git</developerConnection>
+	</scm>
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -20,7 +39,7 @@
 		</dependency>
 	</dependencies>
 	<properties>
-		<encoding>UTF-8</encoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<build>
 		<plugins>
