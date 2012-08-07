@@ -31,6 +31,8 @@
  */
 package de.svenamann.jph;
 
+import java.io.PrintStream;
+
 /**
  * JPasswordHasher is lightweight console application that wraps a Java
  * implementation of Steve Coopers PasswordHasher Firefox Plugin.
@@ -80,54 +82,72 @@ public class JPasswordHasher {
      */
     public static void main(String[] args) {
         if (args.length < 2) {
-            System.out.println("JPasswordHasher");
-            System.out.println();
-            System.out.println("Usage: jph [options] tag master");
-            System.out.println(" tag    - the tag to use for hashing");
-            System.out.println(" master - the master password to use for hashing");
-            System.out.println(" options:");
-            System.out
-                    .println("  --length=(0..27)              - required length of the hash, defaults to 16");
-            System.out
-                    .println("  --requireDigit=(TRUE|false)   - require hash to contain at least one digit");
-            System.out
-                    .println("  --requirePunct=(TRUE|false)   - require hash to contain at least one punctuation");
-            System.out.println("  --requireMixed=(TRUE|false)   - require hash to be mixed case");
-            System.out
-                    .println("  --noSpecial=(true|FALSE)      - require hash not to contain special characters");
-            System.out
-                    .println("  --onlyDigits=(true|FALSE)     - require hash to contain only digits");
+            printHelp(System.out);
         } else {
-            String tag = null;
-            String master = null;
-            int length = 16;
-            boolean requireDigit = true;
-            boolean requirePunctuation = true;
-            boolean requireMixed = true;
-            boolean restrictSpecial = false;
-            boolean restrictDigits = false;
-            for (String arg : args) {
-                if (arg.startsWith("--requireDigit")) {
-                    requireDigit = flagValue(arg);
-                } else if (arg.startsWith("--requirePunct")) {
-                    requirePunctuation = flagValue(arg);
-                } else if (arg.startsWith("--requireMixed")) {
-                    requireMixed = flagValue(arg);
-                } else if (arg.startsWith("--noSpecial")) {
-                    restrictSpecial = flagValue(arg);
-                } else if (arg.startsWith("--onlyDigits")) {
-                    restrictDigits = flagValue(arg);
-                } else if (arg.startsWith("--length")) {
-                    length = intValue(arg);
-                } else if (tag == null) {
-                    tag = arg;
-                } else {
-                    master = arg;
-                }
-            }
-            Hasher jph = new Hasher();
-            System.out.println(jph.generateHashWord(tag, master, length, requireDigit,
-                    requirePunctuation, requireMixed, restrictSpecial, restrictDigits));
+            hash(args, System.out);
         }
+    }
+
+    /**
+     * Evaluates the given arguments, executes hashing accordingly and writes
+     * the result to the given stream.
+     * 
+     * @param args
+     *            the hashing arguments
+     * @param ps
+     *            the stream to write the result to
+     */
+    public static void hash(String[] args, PrintStream ps) {
+        String tag = null;
+        String master = null;
+        int length = 16;
+        boolean requireDigit = true;
+        boolean requirePunctuation = true;
+        boolean requireMixed = true;
+        boolean restrictSpecial = false;
+        boolean restrictDigits = false;
+        for (String arg : args) {
+            if (arg.startsWith("--requireDigit")) {
+                requireDigit = flagValue(arg);
+            } else if (arg.startsWith("--requirePunct")) {
+                requirePunctuation = flagValue(arg);
+            } else if (arg.startsWith("--requireMixed")) {
+                requireMixed = flagValue(arg);
+            } else if (arg.startsWith("--noSpecial")) {
+                restrictSpecial = flagValue(arg);
+            } else if (arg.startsWith("--onlyDigits")) {
+                restrictDigits = flagValue(arg);
+            } else if (arg.startsWith("--length")) {
+                length = intValue(arg);
+            } else if (tag == null) {
+                tag = arg;
+            } else {
+                master = arg;
+            }
+        }
+        Hasher jph = new Hasher();
+        ps.println(jph.generateHashWord(master, tag, length, requireDigit,
+                requirePunctuation, requireMixed, restrictSpecial, restrictDigits));
+    }
+
+    /**
+     * Prints the help message with usage advice to the given stream.
+     * 
+     * @param ps
+     *            the stream to print to
+     */
+    public static void printHelp(PrintStream ps) {
+        ps.println("JPasswordHasher");
+        ps.println();
+        ps.println("Usage: jph [options] tag master");
+        ps.println(" tag    - the tag to use for hashing");
+        ps.println(" master - the master password to use for hashing");
+        ps.println(" options:");
+        ps.println("  --length=(0..27)              - required length of the hash, defaults to 16");
+        ps.println("  --requireDigit=(TRUE|false)   - require hash to contain at least one digit");
+        ps.println("  --requirePunct=(TRUE|false)   - require hash to contain at least one punctuation");
+        ps.println("  --requireMixed=(TRUE|false)   - require hash to be mixed case");
+        ps.println("  --noSpecial=(true|FALSE)      - require hash not to contain special characters");
+        ps.println("  --onlyDigits=(true|FALSE)     - require hash to contain only digits");
     }
 }
